@@ -1,0 +1,51 @@
+/**
+ * Normalize
+ */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Helvetica, Ariel, sans-serif;
+}
+
+/**
+ * Common Page Styles
+ */
+ .title {
+   text-align: center;
+ }
+ .dob {
+   text-align: center;
+ }
+ .day {
+   width: 2em;
+ }
+ .year {
+   width: 4em;
+ }
+ input:required:invalid.touched {
+   border: 2px solid red;
+ }
+
+/**
+ * Utilities
+ */
+ .group:after {
+   /* "group" is another name for clearfix */
+   content: "";
+   display: table;
+   clear: both;
+ }
+
+/* see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
