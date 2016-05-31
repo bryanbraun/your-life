@@ -1,16 +1,5 @@
 /**
  * Interactive form and chart events / logic.
- *
- * Things I could do:
- *   Add legends to the charts.
- *   Improve form styles.
- *   Save birthday in local storage and prepopulate on refresh.
- * 	 Allow for people to change charts via a form in the title?
- * 	 Test on devices / browsers.
- * 	 Confirm that it's accurate down to the hour/day/week, etc.
- * 	 	 For example, it has Holly's BDay right, by Michael's wrong.
- * 	 	 Note: the weeks chart cannot be made perfectly accurate without introducing "leap weeks"
- * 	 Improve valdiation (no days above 31, or even month-specific validation).
  */
 (function() {
   var unit = document.getElementById('unit').textContent.toLowerCase(),
