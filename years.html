@@ -4,29 +4,11 @@
   <meta charset="UTF-8">
   <title>Your Life in Years</title>
   <link rel="stylesheet" href="your-life.css">
-  <style>
-    .life {
-      list-style-type: none;
-      padding: 0;
-      margin: 1rem auto;
-      max-width: 380px; /* 38px per year * 10years = 380px */
-    }
-    .life > li {
-      border: 1px solid black;
-      width: 5.789473684%; /* 22px/380px */
-      /*  For border-box sizing, width includes borders. Thus a         //
-      //  22px width is a like a padding of 20px with two 1px borders.  */
-      padding-bottom: 5.263157895%; /* 20px/380px */
-      margin: 2.105263158%; /* 8px/380px */
-      float: left;
-      transform: rotate(45deg);
-    }
-  </style>
 </head>
 <body>
-  <h1 class="title">Your Life in <span id="unit">Years</span></h1>
+  <h1 class="title">Your Life in <span id="unit" class="unit">Years</span></h1>
   <form class="dob" action="#">
-    <p>Enter your Date of Birth</p>
+    <p class="instruction">Enter your Date of Birth</p>
     <label for="month" class="visuallyhidden">Month</label>
     <select name="month" class="month" id="month" required>
       <option value="0">January</option>
@@ -47,7 +29,7 @@
     <label for="year" class="visuallyhidden">Year</label>
     <input type="text" class="year" id="year" placeholder="1999" pattern="\d{4}" required/>
   </form>
-  <ol class="life group">
+  <ol class="chart years group">
     <li></li>
     <li></li>
     <li></li>

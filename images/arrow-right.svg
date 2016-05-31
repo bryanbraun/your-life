@@ -1,0 +1,9 @@
+<svg width="120px" height="22px" viewBox="0 0 120 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="Group" transform="translate(1.000000, 3.000000)" stroke="#000080" stroke-width="3">
+            <path d="M0.5,7.5 L115.5,7.5" id="Line"></path>
+            <path d="M108,0 L116.5,7.5" id="Line"></path>
+            <path d="M109,16 L116.5,7.5" id="Line"></path>
+        </g>
+    </g>
+</svg>

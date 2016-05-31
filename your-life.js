@@ -7,7 +7,9 @@
  *   Save birthday in local storage and prepopulate on refresh.
  * 	 Allow for people to change charts via a form in the title?
  * 	 Test on devices / browsers.
- * 	 Confirm that it's accurate down to the hour, etc.
+ * 	 Confirm that it's accurate down to the hour/day/week, etc.
+ * 	 	 For example, it has Holly's BDay right, by Michael's wrong.
+ * 	 	 Note: the weeks chart cannot be made perfectly accurate without introducing "leap weeks"
  * 	 Improve valdiation (no days above 31, or even month-specific validation).
  */
 (function() {
@@ -15,7 +17,7 @@
       yearEl = document.getElementById('year'),
       monthEl = document.getElementById('month'),
       dayEl = document.getElementById('day'),
-      items = document.querySelectorAll('.life li'),
+      items = document.querySelectorAll('.chart li'),
       itemCount,
       COLOR = 'red',
       KEY = {
@@ -68,9 +70,9 @@
   }
 
   function calculateElapsedTime() {
-      var currentDate = Date.now(),
+      var currentDate = new Date(),
           dateOfBirth = _getDateOfBirth(),
-          diff = currentDate - dateOfBirth,
+          diff = currentDate.getTime() - dateOfBirth.getTime(),
           elapsedTime;
 
       switch (unit) {
@@ -79,6 +81,11 @@
           break;
         case 'weeks':
           elapsedTime = Math.round(diff/(1000*60*60*24*7));
+          break;
+        case 'months':
+          // Months are tricky, being variable length, so I opted for the average number
+          // of days in a month as a close-enough approximation.
+          elapsedTime = Math.round(diff/(1000*60*60*24*30.4375));
           break;
         case 'years':
           elapsedTime = Math.round(diff/(1000*60*60*24*365.25));
