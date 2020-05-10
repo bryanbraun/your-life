@@ -6,7 +6,14 @@
   <link rel="stylesheet" href="your-life.css">
 </head>
 <body>
-  <h1 class="title">Your Life in <span id="unit" class="unit">Years</span></h1>
+  <div class="title-box">
+    <h1 class="title">Your Life in <label for="unitbox" class="unitbox-label visuallyhidden">Years</label></h1>
+    <select name="unitbox" class="unitbox" id="unitbox" required>
+      <option value="years" selected>Years</option>
+      <option value="months">Months</option>
+      <option value="weeks">Weeks</option>
+    </select>
+  </div>
   <form class="dob" action="#">
     <p class="instruction">Enter your Date of Birth</p>
     <label for="month" class="visuallyhidden">Month</label>
@@ -121,6 +128,10 @@
     <li></li>
     <li></li>
   </ol>
+  <div class="credits">
+    <p>Based on the <a href="http://waitbutwhy.com/2014/05/life-weeks.html">Your Life in Weeks</a> post by Tim Urban, from <a href="http://waitbutwhy.com/">Wait But Why</a>.</p>
+    <p><a href="https://github.com/bryanbraun/your-life">See the code on Github.</a></p>
+  </div>
   <script src="your-life.js"></script>
 </body>
 </html>

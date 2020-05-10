@@ -2,10 +2,11 @@
  * Interactive form and chart events / logic.
  */
 (function() {
-  var unit = document.getElementById('unit').textContent.toLowerCase(),
-      yearEl = document.getElementById('year'),
+  var yearEl = document.getElementById('year'),
       monthEl = document.getElementById('month'),
       dayEl = document.getElementById('day'),
+      unitboxEl = document.getElementById('unitbox'),
+      unitText = document.querySelector('.unitbox-label').textContent.toLowerCase(),
       items = document.querySelectorAll('.chart li'),
       itemCount,
       COLOR = 'red',
@@ -15,6 +16,7 @@
       };
 
   // Set listeners
+  unitboxEl.addEventListener('change', _handleUnitChange);
   yearEl.addEventListener('input', _handleDateChange);
   yearEl.addEventListener('keydown', _handleUpdown);
   yearEl.addEventListener('blur', _unhideValidationStyles);
@@ -26,9 +28,13 @@
   monthEl.selectedIndex = -1;
 
   // Event Handlers
+  function _handleUnitChange(e) {
+    window.location = '/' + e.currentTarget.value + '.html';
+  }
+
   function _handleDateChange(e) {
     if (_dateIsValid()) {
-      itemCount = calculateElapsedTime('years');
+      itemCount = calculateElapsedTime();
       _repaintItems(itemCount);
     } else {
       _repaintItems(0);
@@ -64,7 +70,7 @@
           diff = currentDate.getTime() - dateOfBirth.getTime(),
           elapsedTime;
 
-      switch (unit) {
+      switch (unitText) {
         case 'days':
           elapsedTime = Math.round(diff/(1000*60*60*24));
           break;
