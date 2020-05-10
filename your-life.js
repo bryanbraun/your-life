@@ -29,7 +29,7 @@
 
   // Event Handlers
   function _handleUnitChange(e) {
-    window.location = '/' + e.currentTarget.value + '.html';
+    window.location = '' + e.currentTarget.value + '.html';
   }
 
   function _handleDateChange(e) {
