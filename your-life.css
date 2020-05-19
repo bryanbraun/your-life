@@ -9,7 +9,7 @@ html {
 }
 body {
   font-family: Helvetica, Ariel, sans-serif;
-  margin: 0;
+  margin: 8px; /* for page padding on mobile */
 }
 
 /**
@@ -176,6 +176,11 @@ input:required:invalid.touched {
 .weeks--x-arrow {
   padding-left: 10px;
   vertical-align: bottom;
+}
+@media (max-width: 350px) {
+  .weeks--x-arrow {
+    display: none;
+  }
 }
 .weeks--y-arrow {
   padding-right: 10px;
