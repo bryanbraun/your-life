@@ -134,7 +134,6 @@
     if (DOB.day > 0 && DOB.day < 32) {
       dayEl.value = DOB.day
     }
-    console.log(DOB);
     _handleDateChange();
   }
 })();
