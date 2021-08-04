@@ -1,19 +1,19 @@
 /**
  * Interactive form and chart events / logic.
  */
-(function() {
+(function () {
   var yearEl = document.getElementById('year'),
-      monthEl = document.getElementById('month'),
-      dayEl = document.getElementById('day'),
-      unitboxEl = document.getElementById('unitbox'),
-      unitText = document.querySelector('.unitbox-label').textContent.toLowerCase(),
-      items = document.querySelectorAll('.chart li'),
-      itemCount,
-      COLOR = 'red',
-      KEY = {
-        UP: 38,
-        DOWN: 40
-      };
+    monthEl = document.getElementById('month'),
+    dayEl = document.getElementById('day'),
+    unitboxEl = document.getElementById('unitbox'),
+    unitText = document.querySelector('.unitbox-label').textContent.toLowerCase(),
+    items = document.querySelectorAll('.chart li'),
+    itemCount,
+    COLOR = 'red',
+    KEY = {
+      UP: 38,
+      DOWN: 40
+    };
 
   // Set listeners
   unitboxEl.addEventListener('change', _handleUnitChange);
@@ -21,11 +21,16 @@
   yearEl.addEventListener('keydown', _handleUpdown);
   yearEl.addEventListener('blur', _unhideValidationStyles);
   monthEl.addEventListener('change', _handleDateChange);
+  monthEl.addEventListener('keydown', _handleUpdown);
   dayEl.addEventListener('input', _handleDateChange);
   dayEl.addEventListener('blur', _unhideValidationStyles);
+  dayEl.addEventListener('keydown', _handleUpdown);
 
   // Ensure the month is unselected by default.
   monthEl.selectedIndex = -1;
+
+  // Load default values
+  _loadStoredValueOfDOB();
 
   // Event Handlers
   function _handleUnitChange(e) {
@@ -33,6 +38,14 @@
   }
 
   function _handleDateChange(e) {
+
+    // Save date of birth in local storage
+    localStorage.setItem("DOB", JSON.stringify({
+      month: monthEl.value,
+      year: yearEl.value,
+      day: dayEl.value
+    }));
+
     if (_dateIsValid()) {
       itemCount = calculateElapsedTime();
       _repaintItems(itemCount);
@@ -65,29 +78,29 @@
   }
 
   function calculateElapsedTime() {
-      var currentDate = new Date(),
-          dateOfBirth = _getDateOfBirth(),
-          diff = currentDate.getTime() - dateOfBirth.getTime(),
-          elapsedTime;
+    var currentDate = new Date(),
+      dateOfBirth = _getDateOfBirth(),
+      diff = currentDate.getTime() - dateOfBirth.getTime(),
+      elapsedTime;
 
-      switch (unitText) {
-        case 'days':
-          elapsedTime = Math.round(diff/(1000*60*60*24));
-          break;
-        case 'weeks':
-          elapsedTime = Math.round(diff/(1000*60*60*24*7));
-          break;
-        case 'months':
-          // Months are tricky, being variable length, so I opted for the average number
-          // of days in a month as a close-enough approximation.
-          elapsedTime = Math.round(diff/(1000*60*60*24*30.4375));
-          break;
-        case 'years':
-          elapsedTime = Math.round(diff/(1000*60*60*24*365.25));
-          break;
-      }
+    switch (unitText) {
+      case 'days':
+        elapsedTime = Math.round(diff / (1000 * 60 * 60 * 24));
+        break;
+      case 'weeks':
+        elapsedTime = Math.round(diff / (1000 * 60 * 60 * 24 * 7));
+        break;
+      case 'months':
+        // Months are tricky, being variable length, so I opted for the average number
+        // of days in a month as a close-enough approximation.
+        elapsedTime = Math.round(diff / (1000 * 60 * 60 * 24 * 30.4375));
+        break;
+      case 'years':
+        elapsedTime = Math.round(diff / (1000 * 60 * 60 * 24 * 365.25));
+        break;
+    }
 
-      return elapsedTime || diff;
+    return elapsedTime || diff;
   }
 
   function _dateIsValid() {
@@ -106,5 +119,22 @@
         items[i].style.backgroundColor = '';
       }
     }
+  }
+
+  function _loadStoredValueOfDOB() {
+    var DOB = JSON.parse(localStorage.getItem('DOB'));
+    if (DOB.month >= 0 && DOB.month < 12) {
+      monthEl.value = DOB.month
+    }
+
+    if (DOB.year) {
+      yearEl.value = DOB.year
+    }
+
+    if (DOB.day > 0 && DOB.day < 32) {
+      dayEl.value = DOB.day
+    }
+    console.log(DOB);
+    _handleDateChange();
   }
 })();
