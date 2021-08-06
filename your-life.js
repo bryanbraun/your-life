@@ -123,6 +123,11 @@
 
   function _loadStoredValueOfDOB() {
     var DOB = JSON.parse(localStorage.getItem('DOB'));
+
+    if (!DOB) {
+      return;
+    }
+
     if (DOB.month >= 0 && DOB.month < 12) {
       monthEl.value = DOB.month
     }
